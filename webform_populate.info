@@ -1,0 +1,6 @@
+name = Webform_populate
+description = "Allows populating fields in webforms from one page to the next."
+package = Webform
+dependencies[] = webform
+core = 7.x
+files[] = webform_populate.module

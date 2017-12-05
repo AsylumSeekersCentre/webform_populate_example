@@ -1,0 +1,21 @@
+<?php
+/**
+ * @file
+ * Populate fields on subsequent pages of webform using tokens from first page
+ *
+ * Sometimes in a multi-page webform, it is desirable to re-use data from the
+ * first page on subsequent pages. This module aims to make that possible.
+ */
+
+/**
+ * Implementation of hook_form_alter().
+ */
+function webform_populate_form_alter(&$form, &$form_state, $form_id) {
+  if ((isset($form['#node']) && $form['#node']->type == 'webform') && $form_id == 'webform_client_form_7') {
+    //drupal_set_message("Hi! You are looking at form ID " . $form_id); // To get the form ID for the conditional above
+    //drupal_set_message(json_encode($form_state)); // To get field keys and other info about $form_state structure
+    $firstPagePhone = $form_state['input']['submitted']['civicrm_1_contact_1_fieldset_fieldset']['civicrm_1_contact_1_phone_phone'];
+    $form['submitted']['civicrm_2_contact_1_fieldset_fieldset']['civicrm_2_contact_1_phone_phone']['#value'] = $firstPagePhone;
+  }
+}
+
